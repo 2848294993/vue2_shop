@@ -5,11 +5,11 @@
       <el-form ref="elloginform" :rules="loginRule" :model="loginForm" label-width="80px">
         <el-form-item class="input" prop="username">
           <label slot="label" class="label">用户名</label>
-          <el-input v-model="loginForm.username"></el-input>
+          <el-input v-model.trim="loginForm.username"></el-input>
         </el-form-item>
         <el-form-item class="input" prop="password">
           <label slot="label" class="label">密&nbsp;&nbsp;&nbsp;码</label>
-          <el-input v-model="loginForm.password" type="password" show-password>
+          <el-input v-model.trim="loginForm.password" type="password" show-password>
           </el-input>
         </el-form-item>
         <el-form-item class="button">
@@ -25,6 +25,7 @@
 
 <script>
 import { login } from "@/api/loginApi";
+import remind from "@/utils/Remind"
 export default {
   name: "Login",
   data() {
@@ -51,7 +52,7 @@ export default {
         if (validate) {//通过验证
           const { data: res } = await login(this.loginForm);
           if (res.meta.status !== 200)
-            return this.remind("用户名或者密码错误", "提示");
+            return remind("用户名或者密码错误", "提示", this);
           //登录成功
           else {
             window.localStorage.setItem("token", res.data.token);//在本地存储token
@@ -59,7 +60,7 @@ export default {
           }
         }
         else {//没有通过验证
-          return this.remind("用户名或者密码不符合要求", "提示");
+          return remind("用户名或者密码不符合要求", "提示", this);
         }
       })
     },
@@ -68,11 +69,7 @@ export default {
       this.loginForm.password = "";
     },
 
-    remind(content, title) {
-      this.$alert(content, title, {
-        confirmButtonText: '确定'
-      });
-    }
+
   }
 }
 </script>
