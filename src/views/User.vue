@@ -36,7 +36,7 @@
           <template #default="scoped">
             <el-button type="primary" icon="el-icon-edit" circle @click="editUserButton(scoped.row)"></el-button>
             <el-button type="danger" icon="el-icon-delete" circle @click="deleteUser(scoped.row.id)"></el-button>
-            <el-button type="success" icon="el-icon-setting" circle></el-button>
+            <el-button type="success" icon="el-icon-setting" circle @click="setRoles(scoped.row)"></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -85,11 +85,28 @@
         <el-button type="primary" @click="editUser">确 定</el-button>
       </span>
     </el-dialog>
+    <el-dialog title="设置角色" :visible.sync="setRoleDialogVisible" width="50%" @close="closeSetRoleDialog">
+      <div>
+        <p>用户名：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ userinfo.username }}</p>
+        <p>角色名：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ userinfo.role_name }}</p>
+        <p>修改角色为:
+          <el-select v-model="selectedRoleId" placeholder="请选择">
+            <el-option v-for="item in roleList" :key="item.id" :label="item.roleName" :value="item.id">
+            </el-option>
+          </el-select>
+        </p>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="setRoleDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="confirmSetRoleDialog">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { getUserList, addUser, stateChange, editUser, deleteUser } from "@/api/UserApi.js";
+import { getRoleList } from "@/api/RoleApi";
+import { getUserList, addUser, stateChange, editUser, deleteUser, setRole } from "@/api/UserApi.js";
 import remind from "@/utils/Remind";
 
 export default {
@@ -158,6 +175,10 @@ export default {
           { validator: mobileValid, trigger: "blur" }
         ]
       },
+      setRoleDialogVisible: false,
+      userinfo: {},
+      roleList: [],
+      selectedRoleId: "",
     }
   },
   methods: {
@@ -242,6 +263,24 @@ export default {
         this.$message.info("已取消删除用户");
       }
 
+    },
+    async setRoles(row) {
+      this.userinfo = row;
+      const { data: res } = await getRoleList();
+      if (res.meta.status !== 200)
+        return remind("获取角色列表失败", "错误", this);
+      this.roleList = res.data;
+      this.setRoleDialogVisible = true;
+    },
+    async confirmSetRoleDialog() {
+      const { data: res } = await setRole(this.userinfo.id, this.selectedRoleId);
+      if (res.meta.status !== 200) remind("更新角色失败", "错误", this);
+      this.getUserList();
+      this.$message.success("更新角色车成功");
+      this.setRoleDialogVisible = false;
+    },
+    closeSetRoleDialog() {
+      this.selectedRoleId = "";
     }
 
   },
@@ -256,11 +295,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-/deep/ .el-breadcrumb__inner {
-  color: #d0b2ed !important;
-  font-weight: 600 !important;
-}
-
 .box-card {
   margin-top: 10px;
   border: 3px solid lightgray;
@@ -275,13 +309,7 @@ export default {
     background-color: #f9e0f1;
   }
 
-  /deep/ .cell {
-    text-align: center;
-  }
 
-  /deep/ .el-table--striped .el-table__body tr.el-table__row--striped td {
-    background: #f9e0f1;
-  }
 
   .el-pagination {
     display: flex;

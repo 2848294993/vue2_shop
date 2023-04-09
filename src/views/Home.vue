@@ -57,11 +57,9 @@ export default {
       const { data: res } = await getMenuList();
       if (res.meta.status !== 200) return remind("请求菜单栏数据失败", "错误", this);
       this.menulist = res.data;
-      console.log(this.menulist);
     },
     toggleMenu(path) {
       window.sessionStorage.setItem("menu", path);
-      console.log(path);
       this.defaultactive = path;
     },
   },

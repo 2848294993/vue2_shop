@@ -20,3 +20,6 @@ export const deleteUser = (id) => {
   return request.delete("users/" + id);
 
 }
+export const setRole = (id, rid) => {
+  return request.put(`users/${id}/role`, { rid });
+}
