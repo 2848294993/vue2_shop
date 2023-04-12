@@ -49,6 +49,15 @@ body {
 
 }
 
+.el-tag--warning.el-tag--light {
+  background-color: #e6a23c;
+
+}
+
+.el-tag--info.el-tag--light {
+  background-color: #e9e9eb;
+}
+
 .el-tag--success.el-tag.el-tag--light {
   background-color: #8be5a6;
 }
@@ -64,4 +73,13 @@ body {
 ::-webkit-scrollbar {
   /* width为0：隐藏竖向滚动条 */
   width: 0;
+}
+
+.el-cascader-node>.el-radio {
+  display: none !important;
+}
+
+.el-pagination {
+  display: flex;
+  justify-content: center;
 }

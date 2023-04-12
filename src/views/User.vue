@@ -311,9 +311,6 @@ export default {
 
 
 
-  .el-pagination {
-    display: flex;
-    justify-content: center;
-  }
+
 }
 </style>
