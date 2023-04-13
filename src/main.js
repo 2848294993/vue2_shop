@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import '@/style/theme/index.css';
 import "@/style/mystyle.css";
-import { Form, FormItem, Input, Button, Image, MessageBox, Container, Header, Aside, Main, Menu, Submenu, MenuItem, Breadcrumb, BreadcrumbItem, Card, Table, TableColumn, Col, Row, Switch, Pagination, Dialog, Message, Tag, Tree, Checkbox, Select, Option, Cascader } from "element-ui";
+import { Form, FormItem, Input, Button, Image, MessageBox, Container, Header, Aside, Main, Menu, Submenu, MenuItem, Breadcrumb, BreadcrumbItem, Card, Table, TableColumn, Col, Row, Switch, Pagination, Dialog, Message, Tag, Tree, Checkbox, Select, Option, Cascader, Alert, Tabs, TabPane } from "element-ui";
 
 Vue.use(Form);
 Vue.use(FormItem);
@@ -33,6 +33,9 @@ Vue.use(Checkbox);
 Vue.use(Select);
 Vue.use(Option);
 Vue.use(Cascader);
+Vue.use(Alert);
+Vue.use(Tabs);
+Vue.use(TabPane);
 Vue.prototype.$message = Message;
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$alert = MessageBox.alert;
@@ -43,5 +46,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  //render函数指定了渲染的是哪一个组件，被指定的组件就是根组件
   render: h => h(App)
 }).$mount('#app')
