@@ -7,7 +7,7 @@ import "@/style/mystyle.css";
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
-import { Form, FormItem, Input, Button, Image, MessageBox, Container, Header, Aside, Main, Menu, Submenu, MenuItem, Breadcrumb, BreadcrumbItem, Card, Table, TableColumn, Col, Row, Switch, Pagination, Dialog, Message, Tag, Tree, Checkbox, Select, Option, Cascader, Alert, Tabs, TabPane, Steps, Step, InputNumber, CheckboxGroup, Upload } from "element-ui";
+import { Form, FormItem, Input, Button, Image, MessageBox, Container, Header, Aside, Main, Menu, Submenu, MenuItem, Breadcrumb, BreadcrumbItem, Card, Table, TableColumn, Col, Row, Switch, Pagination, Dialog, Message, Tag, Tree, Checkbox, Select, Option, Cascader, Alert, Tabs, TabPane, Steps, Step, InputNumber, CheckboxGroup, Upload, Timeline, TimelineItem } from "element-ui";
 
 Vue.use(Form);
 Vue.use(FormItem);
@@ -45,7 +45,9 @@ Vue.use(Step);
 Vue.use(InputNumber);
 Vue.use(CheckboxGroup);
 Vue.use(Upload);
-Vue.use(VueQuillEditor, /* { default global options } */)
+Vue.use(VueQuillEditor, /* { default global options } */);
+Vue.use(Timeline);
+Vue.use(TimelineItem);
 Vue.prototype.$message = Message;
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$alert = MessageBox.alert;
