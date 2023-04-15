@@ -48,6 +48,12 @@ export default {
       defaultactive: 'users',
     }
   },
+  watch: {
+    '$route.path'(newVal) {
+      if (newVal.slice(6) !== "addgoods")
+        this.defaultactive = newVal.slice(6);
+    }
+  },
   methods: {
     logout() {
       window.localStorage.removeItem("token");
@@ -71,6 +77,7 @@ export default {
     }
   }
 }
+
 </script>
 
 
