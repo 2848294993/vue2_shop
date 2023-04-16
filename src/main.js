@@ -4,10 +4,13 @@ import router from './router'
 import VueQuillEditor from 'vue-quill-editor'
 import '@/style/theme/index.css';
 import "@/style/mystyle.css";
-import 'quill/dist/quill.core.css'
-import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
+import 'quill/dist/quill.core.css';
+import 'quill/dist/quill.snow.css';
+import 'quill/dist/quill.bubble.css';
+
+
 import { Form, FormItem, Input, Button, Image, MessageBox, Container, Header, Aside, Main, Menu, Submenu, MenuItem, Breadcrumb, BreadcrumbItem, Card, Table, TableColumn, Col, Row, Switch, Pagination, Dialog, Message, Tag, Tree, Checkbox, Select, Option, Cascader, Alert, Tabs, TabPane, Steps, Step, InputNumber, CheckboxGroup, Upload, Timeline, TimelineItem } from "element-ui";
+
 
 Vue.use(Form);
 Vue.use(FormItem);

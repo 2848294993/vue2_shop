@@ -187,6 +187,7 @@ export default {
       if (res.meta.status !== 200) return remind("获取用户列表失败", "错误", this);
       this.userList = res.data.users;
       this.total = res.data.total;
+      console.log(this.userList);
     },
     handleSizeChange(newSize) {
       this.queryInfo.pagesize = newSize;
